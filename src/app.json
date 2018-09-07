@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/logs/main",
+    "pages/counter/main",
+    "pages/rank/main",
+    "pages/recommend/main",
+    "pages/resource/main",
+    "pages/fm/main",
+    "pages/musiclist/main",
+    "pages/search/main",
+    "pages/playerdetail/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ff3326",
+    "navigationBarTitleText": "网易云音乐",
+    "navigationBarTextStyle": "black"
+  }
+}
