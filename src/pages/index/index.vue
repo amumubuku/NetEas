@@ -28,7 +28,7 @@
    <div class="tabs">
     <swiper :current="activeIndex" :duration="300" @change="Change" class="swiper">
       <swiper-item class="swiper-item">
-        <view><div class="box"></div></view>
+        <view><my></my></view>
       </swiper-item>
       <swiper-item class="swiper-item">
           <home></home>
@@ -60,7 +60,7 @@
           </div>
       </swiper-item>
       <swiper-item class="swiper-item">
-        <view><mv></mv></view>
+        <view><mv :index="activeIndex"></mv></view>
       </swiper-item>
     </swiper> 
   </div>
@@ -74,7 +74,7 @@
          <p>{{currentSong.singer}}</p>
        </div>
        <div class="mini-player-icon">
-         <div class="player-stop flaticon-play-button" @click="next">
+         <div class="player-stop " :class="playicon" @click="next">
          </div>
          <div class="player-list flaticon-list">
          </div>
@@ -88,6 +88,7 @@
 import {recommned} from '@/api/index.js'
 import {mapMutations, mapGetters} from 'vuex'
 import home from '@/components/home'
+import my from '@/components/my'
 import mv from '@/components/mvdetail'
 export default {
   data () {
@@ -106,9 +107,13 @@ export default {
   },
   components: {
     home,
-    mv
+    mv,
+    my
   },
   computed: {
+    playicon () {
+      return this.playing ? 'flaticon-pause' : 'flaticon-play-button'
+    },
     taggle: function () {
       return {
       }
@@ -116,7 +121,8 @@ export default {
     ...mapGetters([
       'playlist',
       'currentIndex',
-      'currentSong'
+      'currentSong',
+      'playing'
     ])
   },
   methods: {
@@ -181,6 +187,9 @@ export default {
     // 调用应用实例的方法获取全局数据
     // this.getUserInfo()
     // login().then(res => {
+    //   console.log(res)
+    // })
+    // phoneLogin().then(res => {
     //   console.log(res)
     // })
     recommned().then(res => {
@@ -266,7 +275,7 @@ export default {
   position: relative;
   
 }
-.flaticon-play-button::before {
+.flaticon-play-button::before, .flaticon-pause::before {
   font-size: 25px;
   margin:  0 auto;
   color: red;

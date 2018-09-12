@@ -1,0 +1,38 @@
+
+.music-detail {
+  border-top-right-radius: 8rpx;
+  border-top-left-radius: 8rpx;
+}
+.detail-item {
+  display: flex;
+  width: 100%;
+  line-height: 48rpx;
+  font-size: 24rpx;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+.detail-left {
+  width: 6%;
+  color: #D2D6D6;
+  text-align: center;
+  padding: 0 6rpx;
+}
+.detail-right {
+  border-bottom: 2rpx solid rgb(233, 234, 235);
+  flex: 1;
+  margin-top: 6rpx;
+}
+.detail-right .flaticon-more {
+  position: absolute;
+  right: 12rpx;
+  top: 28rpx;
+  color: #c9c4c4;
+}
+.singer {
+  color: #aaa2a2;
+  font-size: 22rpx;
+}
+.flaticon-more::before {
+  font-size: 28rpx;
+}

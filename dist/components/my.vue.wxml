@@ -1,0 +1,22 @@
+<template name="f9e8d82a">
+  <view class="_div data-v-99edd19a my">
+    <view class="_div data-v-99edd19a my-item">
+      <view class="_div data-v-99edd19a item-icon">
+        <view class="_i data-v-99edd19a flaticon-musical-note"></view>
+      </view>
+      <view class="_div data-v-99edd19a item-detail">本地音乐</view>
+    </view>
+    <view class="_div data-v-99edd19a my-item">
+      <view class="_div data-v-99edd19a item-icon">
+        <view class="_i data-v-99edd19a flaticon-heart"></view>
+      </view>
+      <view class="_div data-v-99edd19a item-detail">我喜欢的</view>
+    </view>
+    <view class="_div data-v-99edd19a my-item">
+      <view class="_div data-v-99edd19a item-icon">
+        <view class="_i data-v-99edd19a flaticon-passage-of-time"></view>
+      </view>
+      <view class="_div data-v-99edd19a item-detail">最近播放</view>
+    </view>
+  </view>
+</template>

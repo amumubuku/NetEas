@@ -58,7 +58,7 @@ export default {
 .detail-item {
   display: flex;
   width: 100%;
-  line-height: 20px;
+  line-height: 24px;
   font-size: 12px;
   position: relative;
   justify-content: center;

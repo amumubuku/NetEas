@@ -4,11 +4,14 @@
        <div class="mv-detail">
          <div class="mv-item" v-for="(item, index) in mv" :key="index" @click="playmv(index)">
              <div class="mv-content">
+                <img :src="item.cover" alt="">
                 <video :src="item.brs[1080]" v-if="index === currentIndex" autoplay="autoplay"></video>
-                <img :src="item.cover" alt="" v-if="index != currentIndex">
-                <div class="video-detail">
+                <div class="video-detail" v-show="index != currentIndex">
                   <p class="playCount flaticon-next">{{item.playCount}}万</p>
                   <p class="duration flaticon-passage-of-time">{{item.duration}}</p>
+                </div>
+                <div class="play-video" @click="playmv(index)" v-show="index != currentIndex">
+                  <i class="flaticon-next"></i>
                 </div>
              </div>
              <div class="mv-bot">
@@ -29,7 +32,13 @@ export default {
   data () {
     return {
       mv: [],
-      currentIndex: ''
+      currentIndex: -1
+    }
+  },
+  props: {
+    index: {
+      tyep: Number,
+      default: 0
     }
   },
   methods: {
@@ -54,13 +63,30 @@ export default {
       })
     }
   },
-  onLoad () {
-    this.getmv()
+  watch: {
+    index (newIndex, oldIndex) {
+      if (newIndex === 2) {
+        this.getmv()
+      }
+    }
   }
 }
 </script>
 
 <style>
+.play-video {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  top: 45%;
+  left: 39%;
+}
+.play-video > .flaticon-next::before {
+  font-size: 38px;
+  color: #ccc;
+  position: relative;
+  left: 20px;
+}
 .mv {
   width: 100%;
   height: 100%;

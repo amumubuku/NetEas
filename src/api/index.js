@@ -130,24 +130,27 @@ export function getsongdetail (songid) {
     })
   })
 }
-export function login () {
+export function phoneLogin (phone, pass) {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: host + '/login/cellphone?phone=19984480032&password=Fizz0311.',
-      header: {
-        'Cookie': 'id=11'
-      },
+      url: host + `/login/cellphone?phone=${phone}&password=${pass}`,
       success: function (res) {
         if (!res.data.code === code) {
           return false
         }
-        var cookie = res.header['set-cookie']
-        var userid = res.data.profile.userId
-        console.log(cookie)
-        wx.setStorage({
-          'cookie': cookie,
-          'userid': userid
-        })
+        resolve(res.data)
+      }
+    })
+  })
+}
+export function emailLogin (email, pass) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: host + `/login?email=${email}&password=pass`,
+      success: function (res) {
+        if (!res.data.code === code) {
+          return false
+        }
         resolve(res.data)
       }
     })
@@ -200,6 +203,19 @@ export function suggest (keywords) {
         // if (!res.data.code === code) {
         //   return false
         // }
+        resolve(res.data)
+      }
+    })
+  })
+}
+export function comment (songid, offset = 1) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: host + `/comment/music?id=${songid}&limit=10&offset=${offset}`,
+      success: function (res) {
+        if (!res.data.code === code) {
+          return false
+        }
         resolve(res.data)
       }
     })

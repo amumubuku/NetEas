@@ -37,6 +37,9 @@ const mutations = {
   },
   [types.SET_PLAYID] (state, item) {
     state.personalized = item
+  },
+  [types.SET_COMMENTID] (state, COMMENTID) {
+    state.commentid = COMMENTID
   }
 }
 export default mutations

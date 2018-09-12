@@ -1,0 +1,156 @@
+@import "../../common/vendor.wxss";
+
+.flaticon-menu::before {
+  color: #fff;
+}
+#box {
+  padding: 8rpx;
+  position: relative;
+  top: -6rpx;
+  left: 0;
+}
+.current {
+  color: #fff;
+  font-size: 26rpx;
+}
+.scroll-lyric {
+  font-size: 24rpx;
+  line-height: 36rpx;
+  text-align: center;
+  color: #666;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+.player-cd {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 80%;
+}
+.progressBtn {
+  width: 22rpx;
+  height: 22rpx;
+  background-color: #fff;
+  position: absolute;
+  top: -6rpx;
+  left: 0;
+  border-radius: 50%;
+  z-index: 1;
+}
+.progressBtn::before {
+  content: '';
+  width: 18rpx;
+  height: 18rpx;
+  background-color: red;
+  border-radius: 50%;
+}
+.background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .6;
+  -webkit-filter: blur(40rpx);
+  filter: blur(40rpx);
+}
+.background ._img {
+  height: 100%;
+  width: 100%;
+}
+.player-detail {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #222;
+}
+.player-hender {
+  font-size: 24rpx;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 64rpx;
+}
+.player-singer {
+  font-size: 20rpx;
+  color: #ccc;
+}
+.player-wrapper {
+  height: 72%;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.player-wrapper ._img {
+  position: absolute;
+  left: 10%;
+  top: 0;
+  width: 80%;
+  box-sizing: border-box;
+  height: 100%;
+  border-radius: 50%;
+}
+.operators {
+  width: 100%;
+  display: flex;
+  height: 56%;
+  justify-content: center;
+  align-content: center;
+}
+.operators .player-icon {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.operators .player-icon > ._i::before {
+  position: relative;
+  left: -24rpx;
+  color: #fff;
+  font-size: 40rpx;
+}
+.operators .player-icon > .flaticon-pause::before .flaticon-play-button::before {
+  font-size: 48rpx;
+}
+.operators .player-icon > ._i {
+  height: 68rpx;
+  width: 68rpx;
+}
+.progress-bar-wrapper {
+  height: 18%;
+  margin: 0 24rpx;
+  position: relative;
+}
+.buttom-hender {
+  height: 26%;
+}
+.player-buttom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 18%;
+}
+.inner-item {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 6rpx;
+}
+.progress-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22rpx;
+  color: #fff;
+}
+.progress-inner {
+  flex: 1;
+  height: 8rpx;
+  margin: 0 12rpx;
+  border-radius: 6rpx;
+  position: relative;
+}

@@ -7,22 +7,26 @@
       <p>{{currentSong.name}}</p>
       <p class="player-singer">{{currentSong.singer}}</p>
     </div>
-    <div class="player-wrapper">
-      <div class="player-cd">
+    <div class="player-wrapper" @touchstart="Touchstart" @touchend="TouchEnd" @click="toggleying">
+      <div class="player-cd" v-show="toggleplaying">
          <img :src="currentSong.image" alt=""> 
       </div>
-      <div class="Lyric">
-        <p v-for="(item, index) in currentLyric.lines" :key="index" :class="{'current': currentLineNum === index}">{{item.txt}}</p>
-      </div>
+      <scroll-view class="scroll-lyric" scroll-y style="width: 100%;height:100%" :scroll-into-view="scroll_id" scroll-with-animation="true" v-show="!toggleplaying">
+        <div class="Lyric">
+          <p v-for="(item, index) in currentLyric.lines" :key="index" :class="{'current': currentLineNum === index}" :id="scroll + index">{{item.txt}}</p>
+        </div>
+      </scroll-view>
     </div>
     <div class="player-buttom">
-      <div class="buttom-hender"></div>
+      <div class="buttom-hender">
+        <div class="comment"><div class="comment-icon" @click="opencomment"><i class="flaticon-menu"></i></div></div>
+      </div>
       <div class="progress-bar-wrapper">
         <div class="progress-btn">
           <p>{{Time}}</p>
-          <div class="progress-inner" id="box">
+          <div class="progress-inner" >
              <div class="progressBtn" :style="{ left: left + 'px' }" :animation="btn"></div>
-             <progress :percent="percent" stroke-width="3" backgroundColor="#888" activeColor="#ff3326"/>
+             <progress @click="seek" :percent="percent" stroke-width="3" backgroundColor="#888" activeColor="#ff3326" id="box"/>
           </div>
           <p>{{dt}}</p>
         </div>
@@ -35,7 +39,7 @@
           <i class="flaticon-next-1"></i>
         </div>
         <div class="player-icon" @click="changplaying">
-          <i class="flaticon-pause"></i>
+          <i :class="playicon"></i>
         </div>
         <div class="player-icon" @click="next">
           <i class="flaticon-next"></i>
@@ -50,6 +54,7 @@
 <script>
 import {mapMutations, mapGetters} from 'vuex'
 import Lyric from 'lyric-parser'
+const btnWidht = 6
 export default {
   components: {
   },
@@ -64,13 +69,21 @@ export default {
       dt: 0,
       Time: 0.00,
       query: '',
-      btnwidth: 0,
+      progressWidth: 0,
       currentLyric: '',
       playingLyric: '',
-      currentLineNum: 0
+      currentLineNum: 0,
+      scroll_id: 'scroll0',
+      scroll: 'scroll',
+      offLeft: 0,
+      currentScroll: false,
+      toggleplaying: false
     }
   },
   computed: {
+    playicon () {
+      return this.playing ? 'flaticon-pause' : 'flaticon-play-button'
+    },
     taggle: function () {
       return {
       }
@@ -83,15 +96,36 @@ export default {
     ])
   },
   methods: {
+    toggleying () {
+      this.toggleplaying = !this.toggleplaying
+    },
+    opencomment () {
+      this.setcomment(this.currentSong.id)
+      const url = '../comment/main'
+      wx.navigateTo({ url })
+    },
+    Touchstart (e) {
+      this.currentScroll = true
+    },
+    TouchEnd (e) {
+      this.currentScroll = false
+      console.log(e)
+    },
+    seek (e) {
+      this.touch.percent = (e.touches[0].pageX - this.offLeft - btnWidht) / this.progressWidth
+      let startTime = this.touch.percent * this.duration
+      this.backgroundAudioManager.seek(startTime)
+      this.currentLyric.seek(startTime * 1000)
+    },
     getLyric () {
       this.currentSong.getLyric().then(lyric => {
-        if (lyric.length === 27) {
-          this.playingLyric = lyric.slice(10)
-          return
-        }
-        if (this.currentLyric === lyric) {
-          return
-        }
+        // if (lyric.length === 27) {
+        //   this.playingLyric = lyric.slice(10)
+        //   return
+        // }
+        // if (this.currentLyric === lyric) {
+        //   return
+        // }
         this.currentLyric = new Lyric(lyric, this.handleLyric)
         this.currentLyric.play()
       }).catch(() => {
@@ -101,31 +135,32 @@ export default {
       })
     },
     next () {
-      let currentIndex
+      let index = 0
       if (this.currentIndex >= this.playlist.length) {
-        currentIndex = 0
-        this.setPlayindex(currentIndex)
+        index = 0
+        this.setPlayindex(index)
         return
       }
-      currentIndex++
-      this.setPlayindex(currentIndex)
+      this.setPlayindex(index + 1)
     },
     prve () {
-      let currentIndex
+      let index = 0
       if (this.currentIndex === 0) {
-        currentIndex = this.playlist.length
-        this.setPlayindex(currentIndex)
+        index = this.playlist.length
+        this.setPlayindex(index)
         return
       }
-      currentIndex--
-      this.setPlayindex(currentIndex)
+      index--
+      this.setPlayindex(index)
     },
     changplaying () {
       this.setplaying(!this.playing)
     },
     handleLyric ({lineNum, txt}) {
       this.currentLineNum = lineNum
-      if (lineNum > 5) {
+      if (lineNum > 6) {
+        if (this.currentScroll) return
+        this.scroll_id = this.scroll + (lineNum - 5)
       } else {
       }
       this.playingLyric = txt
@@ -133,7 +168,8 @@ export default {
     ...mapMutations({
       setplayid: 'SET_PLAYID',
       setPlayindex: 'SET_CURRENT_INDEX',
-      setplaying: 'SET_PLAYING'
+      setplaying: 'SET_PLAYING',
+      setcomment: 'SET_COMMENTID'
     }),
     format (interval) {
       interval = interval | 0
@@ -150,6 +186,7 @@ export default {
       return num
     },
     play () {
+      this.getLyric()
       this.setplaying(!this.playing)
       let play = this.currentSong
       this.percent = 0
@@ -157,23 +194,25 @@ export default {
       this.duration = play.duration / 1000
       this.dt = this.format(this.duration)
       this.backgroundAudioManager.title = play.name
-      this.backgroundAudioManager.epname = play.name
+      this.backgroundAudioManager.name = play.name
       this.backgroundAudioManager.singer = play.singer
       this.backgroundAudioManager.coverImgUrl = play.image
       this.backgroundAudioManager.src = play.url
     },
     offset (percent) {
       var that = this
-      if (!that.btnwidth > 0) {
+      if (!that.progressWidth > 0) {
         this.query = wx.createSelectorQuery()
         this.query.select('#box').boundingClientRect(function (rect) {
-          that.btnwidth = rect.width
+          that.progressWidth = rect.width - rect.left
+          that.offLeft = rect.left + 12
         }).exec()
       }
-      that.left = percent * (that.btnwidth - 4)
+      that.left = percent * (that.progressWidth - btnWidht)
     }
   },
-  onLoad () {
+  created () {
+    this.touch = {}
     this.backgroundAudioManager = wx.getBackgroundAudioManager()
     this.backgroundAudioManager.onTimeUpdate(e => {
       this.currentTime = this.backgroundAudioManager.currentTime
@@ -187,8 +226,14 @@ export default {
       newplaying ? this.backgroundAudioManager.play() : this.backgroundAudioManager.pause()
     },
     currentSong (newSong, oldSong) {
+      if (newSong === oldSong) {
+        return
+      }
+      if (this.currentLyric) {
+        this.scroll_id = 'scroll0'
+        this.currentLyric.stop()
+      }
       this.play()
-      this.getLyric()
     },
     currentTime (newTime, oldtime) {
       this.percent = newTime / this.duration * 100
@@ -197,21 +242,30 @@ export default {
   }
 }
 </script>
-
 <style>
+.flaticon-menu::before {
+  color: #fff
+}
+#box {
+  padding: 4px;
+  position: relative;
+  top:-3px;
+  left: 0;
+}
 .current {
   color: #fff;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 13px;
 }
-.Lyric p {
+.scroll-lyric {
   font-size: 12px;
-  line-height: 16px;
+  line-height: 18px;
   text-align: center;
   color: #666;
-}
-.Lyric {
   width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
 }
 .player-cd {
   display: inline-block;
@@ -269,9 +323,10 @@ export default {
   color: #ccc;
 }
 .player-wrapper {
-  height: 67%;
+  height: 72%;
   width: 100%;
   margin: 0 auto;
+  position: relative;
 }
 .player-wrapper img {
   position: absolute;
@@ -301,7 +356,7 @@ export default {
   color: #fff;
   font-size: 20px;
 }
-.operators .player-icon > .flaticon-pause::before {
+.operators .player-icon > .flaticon-pause::before .flaticon-play-button::before {
   font-size: 24px;
 }
 .operators .player-icon > i {

@@ -1,0 +1,3 @@
+<import src="/components/music-list.vue.wxml" /><template name="909cc9cc">
+  <view class="_div data-v-75f172a9 music"><template data="{{...$root[$kk+'0'], $root}}" is="2bd48585"></template></view>
+</template>

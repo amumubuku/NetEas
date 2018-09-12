@@ -1,0 +1,63 @@
+@import "../../common/vendor.wxss";
+
+.search-empty {
+  position: absolute;
+  right: 26rpx;
+  height: 40rpx;
+  width: 40rpx;
+  top: 2rpx;
+  padding: 16rpx;
+  border-radius: 50%;
+  z-index: 1;
+}
+.flaticon-close::before {
+  font-size: 28rpx;
+  color: #fff;
+  position: absolute;
+  top: 16rpx;
+  left: -24rpx;
+}
+.search-input {
+  height: 72rpx;
+  width: 100%;
+  background-color: #ff3326;
+}
+.search-wrapper {
+  width: 100%;
+  margin-bottom: 32rpx;
+  position: relative;
+}
+._input {
+  height: 83%;
+  width: 100%;
+  margin: 0 44rpx;
+  margin-right: 12rpx;
+  font-size: 26rpx;
+  line-height: 28rpx;
+  border: 0;
+  border-bottom: 2rpx solid rgb(230, 214, 214);
+  color: #fff;
+}
+._h3 {
+  font-size: 20rpx;
+  color: #c0c0c0;
+  margin-left: 24rpx;
+}
+.shortcut {
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+  align-content: center;
+  justify-items: inherit;
+  flex-flow: wrap;
+}
+.shortcut-item {
+  line-height: 56rpx;
+  text-align: center;
+  padding: 0 16rpx;
+  margin: 8rpx 14rpx;
+  border: 2rpx solid #ccc;
+  border-radius: 28rpx;
+  font-size: 20rpx;
+  color: #222;
+}

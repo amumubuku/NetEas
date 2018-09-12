@@ -1,0 +1,23 @@
+<template name="00297939">
+  <view class="_div data-v-2f796681 mv">
+    <scroll-view class="_scroll-view data-v-2f796681 scroll-view_H" scroll-y bindscrolltolower="handleProxy" style="width: 100%;height:100%" data-eventid="{{'2'}}" data-comkey="{{$k}}">
+      <view class="_div data-v-2f796681 mv-detail">
+        <view class="_div data-v-2f796681 mv-item" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'1-'+index}}" data-comkey="{{$k}}" wx:for="{{mv}}" wx:for-index="index" wx:for-item="item">
+          <view class="_div data-v-2f796681 mv-content">
+            <image src="{{item.cover}}" alt class="_img data-v-2f796681"></image> <video src="{{item.brs[1080]}}" wx:if="{{index === currentIndex}}" autoplay="autoplay" class="_video data-v-2f796681"></video>
+            <view class="_div data-v-2f796681 video-detail" hidden="{{!(index != currentIndex)}}">
+              <view class="_p data-v-2f796681 playCount flaticon-next">{{item.playCount}}万</view>
+              <view class="_p data-v-2f796681 duration flaticon-passage-of-time">{{item.duration}}</view>
+            </view>
+            <view class="_div data-v-2f796681 play-video" bindtap="handleProxy" hidden="{{!(index != currentIndex)}}" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}">
+              <view class="_i data-v-2f796681 flaticon-next"></view>
+            </view>
+          </view>
+          <view class="_div data-v-2f796681 mv-bot">
+            <view class="_p data-v-2f796681">{{item.name}} - {{item.artistName}}</view> <label class="_span data-v-2f796681 likeCount flaticon-thumb-up">{{item.likeCount}}</label> <label class="_span data-v-2f796681 flaticon-menu">{{item.subCount}}</label>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</template>

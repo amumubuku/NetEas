@@ -1,0 +1,86 @@
+<import src="/components/my.vue.wxml" />
+<import src="/components/home.vue.wxml" />
+<import src="/components/mvdetail.vue.wxml" /><template name="4a598569">
+  <view class="_div data-v-027aadf8 container">
+    <view class="_div data-v-027aadf8 header">
+      <view class="_div data-v-027aadf8 menu">
+        <view class="_div data-v-027aadf8 menu-box ripple">
+          <view class="_i data-v-027aadf8 flaticon-menu-options"></view>
+        </view>
+      </view>
+      <view class="_div data-v-027aadf8 content">
+        <view class="_div data-v-027aadf8 tab-box">
+          <view class="_div data-v-027aadf8 my ripple {{[activeIndex === 0 ? 'active' : '']}}" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+            <view class="_i data-v-027aadf8 flaticon-musical-note"></view>
+          </view>
+          <view class="_div data-v-027aadf8 home ripple {{[activeIndex === 1 ? 'active' : '']}}" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">
+            <view class="_i data-v-027aadf8 flaticon-5b77b6a5cfe0a"></view>
+          </view>
+          <view class="_div data-v-027aadf8 video ripple {{[activeIndex === 2 ? 'active' : '']}}" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}">
+            <view class="_i data-v-027aadf8 flaticon-social-media"></view>
+          </view>
+        </view>
+      </view>
+      <view class="_div data-v-027aadf8 search" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}">
+        <view class="_div data-v-027aadf8 search-box ripple">
+          <view class="_i data-v-027aadf8 flaticon-search"></view>
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-027aadf8 tabs">
+      <swiper current="{{activeIndex}}" duration="{{300}}" bindchange="handleProxy" class="_swiper data-v-027aadf8 swiper" data-eventid="{{'6'}}" data-comkey="{{$k}}">
+        <swiper-item class="_swiper-item data-v-027aadf8 swiper-item">
+          <view class="_view data-v-027aadf8"><template data="{{...$root[$kk+'0'], $root}}" is="f9e8d82a"></template></view>
+        </swiper-item>
+        <swiper-item class="_swiper-item data-v-027aadf8 swiper-item"><template data="{{...$root[$kk+'2'], $root}}" is="4083dbde"></template>
+          <view class="_div data-v-027aadf8 nav-box">
+            <view class="_div data-v-027aadf8 nav-item">
+              <view class="_div data-v-027aadf8 item-top"></view>
+              <view class="_p data-v-027aadf8">私人FM</view>
+            </view>
+            <view class="_div data-v-027aadf8 nav-item">
+              <view class="_div data-v-027aadf8 item-top"></view>
+              <view class="_p data-v-027aadf8">每日推荐</view>
+            </view>
+            <view class="_div data-v-027aadf8 nav-item">
+              <view class="_div data-v-027aadf8 item-top"></view>
+              <view class="_p data-v-027aadf8">歌单</view>
+            </view>
+            <view class="_div data-v-027aadf8 nav-item" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}">
+              <view class="_div data-v-027aadf8 item-top"></view>
+              <view class="_p data-v-027aadf8">排行榜</view>
+            </view>
+          </view>
+          <view class="_h3 data-v-027aadf8">推荐歌单 <view class="_i data-v-027aadf8 flaticon-right-arrow"></view>
+          </view>
+          <view class="_div data-v-027aadf8 recommend">
+            <view class="_div data-v-027aadf8 recommend-item" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'5-'+index}}" data-comkey="{{$k}}" wx:for="{{recommend}}" wx:for-index="index" wx:for-item="item">
+              <view class="_i data-v-027aadf8 playCount">{{item.playCount}}万</view>
+              <image src="{{item.picUrl}}" alt class="_img data-v-027aadf8"></image>
+              <view class="_p data-v-027aadf8">{{item.name}}</view>
+            </view>
+          </view>
+        </swiper-item>
+        <swiper-item class="_swiper-item data-v-027aadf8 swiper-item">
+          <view class="_view data-v-027aadf8"><template data="{{...$root[$kk+'4'], $root}}" is="00297939"></template></view>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class="_div data-v-027aadf8 player" wx:if="{{playlist.length > 1}}" bindtap="handleProxy" data-eventid="{{'8'}}" data-comkey="{{$k}}">
+      <view class="_div data-v-027aadf8 mini-player">
+        <view class="_div data-v-027aadf8 mini-player-img">
+          <image src="{{currentSong.image}}" alt class="_img data-v-027aadf8"></image>
+        </view>
+        <view class="_div data-v-027aadf8 mini-player-detail">
+          <view class="_p data-v-027aadf8">{{currentSong.name}}</view>
+          <view class="_p data-v-027aadf8">{{currentSong.singer}}</view>
+        </view>
+        <view class="_div data-v-027aadf8 mini-player-icon">
+          <view class="_div data-v-027aadf8 player-stop  {{playicon}}" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}"></view>
+          <view class="_div data-v-027aadf8 player-list flaticon-list"></view>
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-027aadf8 loading" hidden="{{!(!recommend)}}"></view>
+  </view>
+</template>
