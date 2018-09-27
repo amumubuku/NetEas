@@ -15,7 +15,7 @@
         </ul>
       </div>
     </div>
-    <div class="loading" v-show="!rank.length > 0"></div>
+    <div class="loading" v-show="rank.length < 0"></div>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
   },
   data () {
     return {
-      rank: null
+      rank: []
     }
   },
   methods: {

@@ -12,5 +12,5 @@ export const disc = state => state.disc
 export const toplist = state => state.toplist
 export const loadsearch = state => state.searchHitory
 export const personalizeds = state => state.personalized
-export const commentid = state => state.commentid
+export const userid = state => state.userid
 // export const loadplaylist = state => normalSongs(state.playHitory)

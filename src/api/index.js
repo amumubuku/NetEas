@@ -221,3 +221,29 @@ export function comment (songid, offset = 1) {
     })
   })
 }
+export function userplaylist (userid) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: host + `/user/playlist?uid=${userid}`,
+      success: function (res) {
+        if (!res.data.code === code) {
+          return false
+        }
+        resolve(res.data.playlist)
+      }
+    })
+  })
+}
+export function userdetail (userid) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: host + `/user/detail?uid=${userid}`,
+      success: function (res) {
+        if (!res.data.code === code) {
+          return false
+        }
+        resolve(res.data.playlist)
+      }
+    })
+  })
+}

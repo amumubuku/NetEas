@@ -5,7 +5,7 @@
           <p>{{personalizeds.name}}</p>
       </div>
       <musicdetail :songs="MusicData"></musicdetail> 
-      <div class="loading" v-show="!MusicData.length > 1"></div>
+      <div class="loading" v-show="MusicData.length < 1"></div>
   </div>
 </template>
 <script>
@@ -40,7 +40,7 @@ export default {
     },
     personalized () {
       wx.setNavigationBarTitle({
-        title: this.personalizeds.description
+        title: this.personalizeds.description ? this.personalizeds.description : ''
       })
       wx.setNavigationBarColor({
         frontColor: '#ffffff',
@@ -55,13 +55,9 @@ export default {
       })
     }
   },
-  created () {
+  onLoad () {
+    this.MusicData = []
     this.personalized()
-  },
-  watch: {
-    personalizeds (newValue, old) {
-      this.personalized()
-    }
   }
 }
 </script>

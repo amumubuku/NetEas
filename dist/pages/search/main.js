@@ -108,6 +108,7 @@ if (false) {(function () {
 //
 //
 //
+//
 
 
 
@@ -121,7 +122,8 @@ if (false) {(function () {
       rank: [],
       shortcthot: [],
       keyWord: '',
-      songs: ''
+      songs: [],
+      loading: false
     };
   },
   onLoad: function onLoad() {
@@ -129,6 +131,7 @@ if (false) {(function () {
 
     this.$watch('keyWord', Object(__WEBPACK_IMPORTED_MODULE_1__utils_index__["c" /* dobounce */])(function (newVal) {
       _this.keyWord = newVal;
+      _this.loading = true;
       _this.endsearch();
     }, 300));
     Object(__WEBPACK_IMPORTED_MODULE_0__api_index__["m" /* shortcut */])().then(function (res) {
@@ -143,9 +146,7 @@ if (false) {(function () {
     empty: function empty() {
       this.keyWord = '';
     },
-    changinput: function changinput(e) {
-      console.log(e);
-    },
+    changinput: function changinput(e) {},
     endsearch: function endsearch() {
       var data = [];
       if (this.keyWord === '') {
@@ -159,6 +160,7 @@ if (false) {(function () {
         });
       });
       this.songs = data;
+      this.loading = false;
     }
   }
 });
@@ -243,6 +245,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "songs": _vm.songs,
       "mpcomid": '0'
     }
+  }), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.loading),
+      expression: "loading"
+    }],
+    staticClass: "loading"
   })], 1)
 }
 var staticRenderFns = []

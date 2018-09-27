@@ -83,10 +83,10 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_index_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_home__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_my__ = __webpack_require__(126);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_mvdetail__ = __webpack_require__(130);
@@ -512,6 +512,61 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_index__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(5);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -536,9 +591,45 @@ if (false) {(function () {
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
-    return {};
+    return {
+      songlist: [],
+      Collectionsong: [],
+      userid: 454819620
+    };
+  },
+
+  methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapMutations */])({
+    setplayid: 'SET_PLAYID'
+  }), {
+    handercilik: function handercilik(item) {
+      console.log(item);
+      var data = {
+        id: item.id,
+        picUrl: item.coverImgUrl,
+        name: item.name,
+        description: item.description
+      };
+      this.setplayid(data);
+      var url = '../musiclist/main';
+      wx.navigateTo({ url: url });
+    }
+  }),
+  created: function created() {
+    var _this = this;
+
+    Object(__WEBPACK_IMPORTED_MODULE_1__api_index__["n" /* userplaylist */])(this.userid).then(function (res) {
+      res.forEach(function (element) {
+        if (element.userId === _this.userid) {
+          _this.songlist.push(element);
+        } else {
+          _this.Collectionsong.push(element);
+        }
+      });
+    });
   }
 });
 
@@ -550,7 +641,11 @@ if (false) {(function () {
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "my"
+    staticClass: "my-content"
+  }, [_c('div', {
+    staticClass: "my-background"
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "user-song"
   }, [_c('div', {
     staticClass: "my-item"
   }, [_c('div', {
@@ -575,9 +670,89 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "flaticon-passage-of-time"
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "item-detail"
-  }, [_vm._v("最近播放")])])])
+  }, [_vm._v("最近播放")])]), _vm._v(" "), _c('div', {
+    staticClass: "songlist"
+  }, [_c('div', [_c('i', {
+    staticClass: "flaticon-right-arrow"
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "songname"
+  }, [_vm._v("创建的歌单(" + _vm._s(_vm.songlist.length + 1) + ")")]), _vm._v(" "), _c('div', [_c('i', {
+    staticClass: "flaticon-settings"
+  })], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "user-song-item"
+  }, _vm._l((_vm.songlist), function(item, index) {
+    return _c('div', {
+      key: index,
+      staticClass: "song-item",
+      attrs: {
+        "eventid": '0-' + index
+      },
+      on: {
+        "click": function($event) {
+          _vm.handercilik(item)
+        }
+      }
+    }, [_c('div', {
+      staticClass: "song-left"
+    }, [_c('img', {
+      attrs: {
+        "src": item.coverImgUrl,
+        "alt": ""
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "song-right"
+    }, [_c('div', {
+      staticClass: "song-detail"
+    }, [_c('p', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(item.trackCount))])], 1), _vm._v(" "), _c('div', [_c('i', {
+      staticClass: "flaticon-more"
+    })], 1)])])
+  })), _vm._v(" "), _c('div', {
+    staticClass: "songlist"
+  }, [_c('div', [_c('i', {
+    staticClass: "flaticon-right-arrow"
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "songname"
+  }, [_vm._v("收藏的歌单(" + _vm._s(_vm.Collectionsong.length + 1) + ")")]), _vm._v(" "), _c('div', [_c('i', {
+    staticClass: "flaticon-settings"
+  })], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "user-collectionsong"
+  }, _vm._l((_vm.Collectionsong), function(item, index) {
+    return _c('div', {
+      key: index,
+      staticClass: "song-item",
+      attrs: {
+        "eventid": '1-' + index
+      },
+      on: {
+        "click": function($event) {
+          _vm.handercilik(item)
+        }
+      }
+    }, [_c('div', {
+      staticClass: "song-left"
+    }, [_c('img', {
+      attrs: {
+        "src": item.coverImgUrl,
+        "alt": ""
+      }
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "song-right"
+    }, [_c('div', {
+      staticClass: "song-detail"
+    }, [_c('p', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(item.trackCount))])], 1), _vm._v(" "), _c('div', [_c('i', {
+      staticClass: "flaticon-more"
+    })], 1)])])
+  }))])])
 }
-var staticRenderFns = []
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "user-detail"
+  }, [_c('div', {
+    staticClass: "user-head-image"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "user-name"
+  })])
+}]
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

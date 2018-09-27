@@ -8,7 +8,7 @@ const state = {
   playing: '',
   fullScreen: false,
   closelist: false,
-  commnetid: 0,
+  userid: 0,
   disc: {},
   toplist: {}
   // searchHitory: loadSearch(),

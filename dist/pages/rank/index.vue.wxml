@@ -12,6 +12,6 @@
         </view>
       </view>
     </view>
-    <view class="_div data-v-3388b25c loading" hidden="{{!(!rank.length > 0)}}"></view>
+    <view class="_div data-v-3388b25c loading" hidden="{{!(rank.length < 0)}}"></view>
   </view>
 </template>

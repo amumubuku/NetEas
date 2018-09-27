@@ -38,7 +38,7 @@ const mutations = {
   [types.SET_PLAYID] (state, item) {
     state.personalized = item
   },
-  [types.SET_COMMENTID] (state, COMMENTID) {
+  [types.SET_USERID] (state, COMMENTID) {
     state.commentid = COMMENTID
   }
 }

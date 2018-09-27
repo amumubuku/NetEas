@@ -6,19 +6,19 @@ global.webpackJsonp([2],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_SINGER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_PLAYLIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SET_CURRENT_INDEX; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_FULLSCREEN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_PLAYING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_ISCLOSELIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_DISC; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_TOPLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_SINGER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_PLAYLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_CURRENT_INDEX; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SET_FULLSCREEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_PLAYING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return SET_ISCLOSELIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SET_DISC; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_TOPLIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ADD_PLAYLIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_SEARCH_HITORY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_PLAYLIST_HITORY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_PLAYID; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SET_COMMENTID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_SEARCH_HITORY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_PLAYLIST_HITORY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return SET_PLAYID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_USERID; });
 var SET_SINGER = 'SET_SINGER';
 var SET_PLAYLIST = 'SET_PLAYLIST';
 var SET_CURRENT_INDEX = 'SET_CURRENT_INDEX';
@@ -31,7 +31,7 @@ var ADD_PLAYLIST = 'ADD_PLAYLIST';
 var SET_SEARCH_HITORY = 'SET_SEARCH_HITORY';
 var SET_PLAYLIST_HITORY = 'SET_PLAYLIST_HITORY';
 var SET_PLAYID = 'SET_PLAYID';
-var SET_COMMENTID = 'SET_COMMENTID';
+var SET_USERID = 'SET_USERID';
 
 /***/ }),
 
@@ -139,7 +139,7 @@ if (false) {(function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store_state__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_mutations__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store_actions__ = __webpack_require__(62);
@@ -176,7 +176,7 @@ var state = {
   playing: '',
   fullScreen: false,
   closelist: false,
-  commnetid: 0,
+  userid: 0,
   disc: {},
   toplist: {}
   // searchHitory: loadSearch(),
@@ -199,9 +199,9 @@ var _mutations;
 
 
 
-var mutations = (_mutations = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["l" /* SET_SINGER */], function (state, singer) {
+var mutations = (_mutations = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["k" /* SET_SINGER */], function (state, singer) {
   state.singer = singer;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["i" /* SET_PLAYLIST */], function (state, _ref) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["h" /* SET_PLAYLIST */], function (state, _ref) {
   var list = _ref.list,
       index = _ref.index;
 
@@ -209,25 +209,25 @@ var mutations = (_mutations = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_help
   state.currentIndex = index;
 }), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["a" /* ADD_PLAYLIST */], function (state, song) {
   state.playlist.unshift(song);
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["c" /* SET_CURRENT_INDEX */], function (state, index) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["b" /* SET_CURRENT_INDEX */], function (state, index) {
   state.currentIndex = index;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["e" /* SET_FULLSCREEN */], function (state, flag) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["d" /* SET_FULLSCREEN */], function (state, flag) {
   state.fullScreen = flag;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["h" /* SET_PLAYING */], function (state, flag) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["g" /* SET_PLAYING */], function (state, flag) {
   state.playing = flag;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["f" /* SET_ISCLOSELIST */], function (state, flag) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["e" /* SET_ISCLOSELIST */], function (state, flag) {
   state.closelist = flag;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["d" /* SET_DISC */], function (state, disc) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["c" /* SET_DISC */], function (state, disc) {
   state.disc = disc;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["m" /* SET_TOPLIST */], function (state, list) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["l" /* SET_TOPLIST */], function (state, list) {
   state.toplist = list;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["k" /* SET_SEARCH_HITORY */], function (state, hitory) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["j" /* SET_SEARCH_HITORY */], function (state, hitory) {
   state.searchHitory = hitory;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["j" /* SET_PLAYLIST_HITORY */], function (state, hitory) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["i" /* SET_PLAYLIST_HITORY */], function (state, hitory) {
   state.playHitory = hitory;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["g" /* SET_PLAYID */], function (state, item) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["f" /* SET_PLAYID */], function (state, item) {
   state.personalized = item;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["b" /* SET_COMMENTID */], function (state, COMMENTID) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_1__mutation_types__["m" /* SET_USERID */], function (state, COMMENTID) {
   state.commentid = COMMENTID;
 }), _mutations);
 /* harmony default export */ __webpack_exports__["a"] = (mutations);
@@ -251,19 +251,19 @@ var selectPlay = function selectPlay(_ref, _ref2) {
   var list = _ref2.list,
       index = _ref2.index;
 
-  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* SET_PLAYLIST */], list);
-  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* SET_CURRENT_INDEX */], index);
-  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* SET_FULLSCREEN */], true);
-  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_PLAYING */], true);
+  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_PLAYLIST */], list);
+  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* SET_CURRENT_INDEX */], index);
+  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* SET_FULLSCREEN */], true);
+  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* SET_PLAYING */], true);
 };
 var addPlay = function addPlay(_ref3, song) {
   var commit = _ref3.commit,
       state = _ref3.state;
 
   commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["a" /* ADD_PLAYLIST */], song);
-  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* SET_CURRENT_INDEX */], 0);
-  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* SET_FULLSCREEN */], true);
-  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* SET_PLAYING */], true);
+  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* SET_CURRENT_INDEX */], 0);
+  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* SET_FULLSCREEN */], true);
+  commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* SET_PLAYING */], true);
 };
 // export const saveSearchHitory = ({commit}, query) => {
 //   commit(types.SET_SEARCH_HITORY, saveSearch(query))
@@ -296,7 +296,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toplist", function() { return toplist; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadsearch", function() { return loadsearch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "personalizeds", function() { return personalizeds; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "commentid", function() { return commentid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userid", function() { return userid; });
 // import {normalSongs} from '../common/js/util'
 var singer = function singer(state) {
   return state.singer;
@@ -331,8 +331,8 @@ var loadsearch = function loadsearch(state) {
 var personalizeds = function personalizeds(state) {
   return state.personalized;
 };
-var commentid = function commentid(state) {
-  return state.commentid;
+var userid = function userid(state) {
+  return state.userid;
 };
 // export const loadplaylist = state => normalSongs(state.playHitory)
 

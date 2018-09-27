@@ -244,6 +244,70 @@
   margin: 0 12rpx;
   color: black;
 }
+.user-song {
+  margin-top: 52rpx;
+}
+.user-detail {
+  position: absolute;
+  width: 96%;
+  height: 112rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 10rpx 40rpx #9E9597;
+  top: 12rpx;
+  left: 2%;
+}
+.song-left {
+  height: 100%;
+  width: 80rpx;
+  margin: 0 24rpx;
+  display: flex;
+  align-items: center;
+}
+.song-left > ._img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 12rpx;
+}
+.song-right {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  font-size: 24rpx;
+  border-bottom: 2rpx solid #888;
+}
+.song-right .song-detail {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.song-right ._div {
+  height: 100%;
+  width: 80rpx;
+}
+.song-item {
+  display: flex;
+  height: 96rpx;
+  width: 100%;
+  background-color: #fff;
+}
+.songlist {
+  height: 44rpx;
+  width: 100%;
+  background-color: #c0c0c0;
+  font-size: 24rpx;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+.songlist ._div {
+  width: 40rpx;
+  height: 100%;
+}
+.songname {
+  flex: 1;
+  line-height: 44rpx;
+}
 .my-item {
   height: 84rpx;
   width: 100%;
@@ -268,6 +332,31 @@
   flex: 1;
   border-bottom: 2rpx solid #c0c0c0;
   line-height: 84rpx;
+}
+.flaticon-right-arrow::before {
+  font-size: 24rpx;
+  position: absolute;
+  top: 12rpx;
+  left: -30rpx;
+}
+.flaticon-settings::before {
+  font-size: 24rpx;
+  position: absolute;
+  top: 12rpx;
+  right: 16rpx;
+}
+.flaticon-more::before {
+  position: relative;
+  top: 34rpx;
+}
+.my-background {
+  width: 100%;
+  height: 80rpx;
+  background-color: #ff3326;
+}
+.my-content {
+  width: 100%;
+  height: 100%;
 }
 .play-video {
   position: absolute;

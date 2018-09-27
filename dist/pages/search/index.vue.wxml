@@ -12,5 +12,6 @@
         <view class="_div data-v-6fafef98 shortcut-item" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'2-'+index}}" data-comkey="{{$k}}" wx:for="{{shortcthot}}" wx:for-index="index" wx:for-item="item"><label class="_span data-v-6fafef98">{{item.first}}</label></view>
       </view>
     </view> <template data="{{...$root[$kk+'0'], $root}}" is="6ba4e087"></template>
+    <view class="_div data-v-6fafef98 loading" hidden="{{!(loading)}}"></view>
   </view>
 </template>

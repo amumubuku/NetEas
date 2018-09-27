@@ -83,10 +83,10 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_index__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(5);
 
 //
 //
@@ -116,7 +116,7 @@ if (false) {(function () {
   components: {},
   data: function data() {
     return {
-      rank: null
+      rank: []
     };
   },
 
@@ -187,8 +187,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (!_vm.rank.length > 0),
-      expression: "!rank.length > 0"
+      value: (_vm.rank.length < 0),
+      expression: "rank.length < 0"
     }],
     staticClass: "loading"
   })], 2)

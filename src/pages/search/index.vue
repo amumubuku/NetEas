@@ -17,6 +17,7 @@
       </div>
     </div>
     <musicdetail :songs="songs"></musicdetail>
+    <div class="loading" v-show="loading"></div>
   </div>
 </template>
 
@@ -33,12 +34,14 @@ export default {
       rank: [],
       shortcthot: [],
       keyWord: '',
-      songs: ''
+      songs: [],
+      loading: false
     }
   },
   onLoad () {
     this.$watch('keyWord', dobounce((newVal) => {
       this.keyWord = newVal
+      this.loading = true
       this.endsearch()
     }, 300))
     shortcut().then(res => {
@@ -53,7 +56,6 @@ export default {
       this.keyWord = ''
     },
     changinput (e) {
-      console.log(e)
     },
     endsearch () {
       let data = []
@@ -68,6 +70,7 @@ export default {
         })
       })
       this.songs = data
+      this.loading = false
     }
   }
 }

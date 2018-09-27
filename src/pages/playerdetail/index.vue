@@ -109,7 +109,6 @@ export default {
     },
     TouchEnd (e) {
       this.currentScroll = false
-      console.log(e)
     },
     seek (e) {
       this.touch.percent = (e.touches[0].pageX - this.offLeft - btnWidht) / this.progressWidth
@@ -119,15 +118,18 @@ export default {
     },
     getLyric () {
       this.currentSong.getLyric().then(lyric => {
-        // if (lyric.length === 27) {
-        //   this.playingLyric = lyric.slice(10)
-        //   return
-        // }
-        // if (this.currentLyric === lyric) {
-        //   return
-        // }
         this.currentLyric = new Lyric(lyric, this.handleLyric)
         this.currentLyric.play()
+        let play = this.currentSong
+        this.percent = 0
+        this.left = 0
+        this.duration = play.duration / 1000
+        this.dt = this.format(this.duration)
+        this.backgroundAudioManager.title = play.name
+        this.backgroundAudioManager.name = play.name
+        this.backgroundAudioManager.singer = play.singer
+        this.backgroundAudioManager.coverImgUrl = play.image
+        this.backgroundAudioManager.src = play.url
       }).catch(() => {
         this.currentLyric = null
         this.currentLineNum = 0
@@ -158,10 +160,10 @@ export default {
     },
     handleLyric ({lineNum, txt}) {
       this.currentLineNum = lineNum
-      if (lineNum > 6) {
-        if (this.currentScroll) return
-        this.scroll_id = this.scroll + (lineNum - 5)
+      if (lineNum > 6 && this.currentScroll) {
+        return
       } else {
+        this.scroll_id = this.scroll + (lineNum - 5)
       }
       this.playingLyric = txt
     },
@@ -186,18 +188,8 @@ export default {
       return num
     },
     play () {
-      this.getLyric()
       this.setplaying(!this.playing)
-      let play = this.currentSong
-      this.percent = 0
-      this.left = 0
-      this.duration = play.duration / 1000
-      this.dt = this.format(this.duration)
-      this.backgroundAudioManager.title = play.name
-      this.backgroundAudioManager.name = play.name
-      this.backgroundAudioManager.singer = play.singer
-      this.backgroundAudioManager.coverImgUrl = play.image
-      this.backgroundAudioManager.src = play.url
+      this.getLyric()
     },
     offset (percent) {
       var that = this
@@ -219,6 +211,9 @@ export default {
       this.Time = this.format(this.currentTime)
     })
     this.backgroundAudioManager.onPlay(e => {
+    })
+    this.backgroundAudioManager.onEnded(e => {
+      this.next()
     })
   },
   watch: {

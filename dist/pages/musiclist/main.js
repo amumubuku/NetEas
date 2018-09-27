@@ -169,11 +169,11 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_index__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_index__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_musicdetail__ = __webpack_require__(47);
 
 //
@@ -215,7 +215,7 @@ if (false) {(function () {
       var _this = this;
 
       wx.setNavigationBarTitle({
-        title: this.personalizeds.description
+        title: this.personalizeds.description ? this.personalizeds.description : ''
       });
       wx.setNavigationBarColor({
         frontColor: '#ffffff',
@@ -230,14 +230,9 @@ if (false) {(function () {
       });
     }
   },
-  created: function created() {
+  onLoad: function onLoad() {
+    this.MusicData = [];
     this.personalized();
-  },
-
-  watch: {
-    personalizeds: function personalizeds(newValue, old) {
-      this.personalized();
-    }
   }
 });
 
@@ -266,8 +261,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (!_vm.MusicData.length > 1),
-      expression: "!MusicData.length > 1"
+      value: (_vm.MusicData.length < 1),
+      expression: "MusicData.length < 1"
     }],
     staticClass: "loading"
   })], 1)

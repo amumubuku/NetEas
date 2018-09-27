@@ -4,6 +4,6 @@
       <image src="{{personalizeds.picUrl}}" alt class="_img data-v-72437e66"></image>
       <view class="_p data-v-72437e66">{{personalizeds.name}}</view>
     </view> <template data="{{...$root[$kk+'0'], $root}}" is="6ba4e087"></template>
-    <view class="_div data-v-72437e66 loading" hidden="{{!(!MusicData.length > 1)}}"></view>
+    <view class="_div data-v-72437e66 loading" hidden="{{!(MusicData.length < 1)}}"></view>
   </view>
 </template>

@@ -83,9 +83,9 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lyric_parser__ = __webpack_require__(156);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lyric_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lyric_parser__);
 
@@ -194,7 +194,6 @@ var btnWidht = 6;
     },
     TouchEnd: function TouchEnd(e) {
       this.currentScroll = false;
-      console.log(e);
     },
     seek: function seek(e) {
       this.touch.percent = (e.touches[0].pageX - this.offLeft - btnWidht) / this.progressWidth;
@@ -206,15 +205,18 @@ var btnWidht = 6;
       var _this = this;
 
       this.currentSong.getLyric().then(function (lyric) {
-        // if (lyric.length === 27) {
-        //   this.playingLyric = lyric.slice(10)
-        //   return
-        // }
-        // if (this.currentLyric === lyric) {
-        //   return
-        // }
         _this.currentLyric = new __WEBPACK_IMPORTED_MODULE_2_lyric_parser___default.a(lyric, _this.handleLyric);
         _this.currentLyric.play();
+        var play = _this.currentSong;
+        _this.percent = 0;
+        _this.left = 0;
+        _this.duration = play.duration / 1000;
+        _this.dt = _this.format(_this.duration);
+        _this.backgroundAudioManager.title = play.name;
+        _this.backgroundAudioManager.name = play.name;
+        _this.backgroundAudioManager.singer = play.singer;
+        _this.backgroundAudioManager.coverImgUrl = play.image;
+        _this.backgroundAudioManager.src = play.url;
       }).catch(function () {
         _this.currentLyric = null;
         _this.currentLineNum = 0;
@@ -248,10 +250,11 @@ var btnWidht = 6;
           txt = _ref.txt;
 
       this.currentLineNum = lineNum;
-      if (lineNum > 6) {
-        if (this.currentScroll) return;
+      if (lineNum > 6 && this.currentScroll) {
+        return;
+      } else {
         this.scroll_id = this.scroll + (lineNum - 5);
-      } else {}
+      }
       this.playingLyric = txt;
     }
   }, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapMutations */])({
@@ -277,18 +280,8 @@ var btnWidht = 6;
       return num;
     },
     play: function play() {
-      this.getLyric();
       this.setplaying(!this.playing);
-      var play = this.currentSong;
-      this.percent = 0;
-      this.left = 0;
-      this.duration = play.duration / 1000;
-      this.dt = this.format(this.duration);
-      this.backgroundAudioManager.title = play.name;
-      this.backgroundAudioManager.name = play.name;
-      this.backgroundAudioManager.singer = play.singer;
-      this.backgroundAudioManager.coverImgUrl = play.image;
-      this.backgroundAudioManager.src = play.url;
+      this.getLyric();
     },
     offset: function offset(percent) {
       var that = this;
@@ -312,6 +305,9 @@ var btnWidht = 6;
       _this2.Time = _this2.format(_this2.currentTime);
     });
     this.backgroundAudioManager.onPlay(function (e) {});
+    this.backgroundAudioManager.onEnded(function (e) {
+      _this2.next();
+    });
   },
 
   watch: {
