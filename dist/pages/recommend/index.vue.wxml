@@ -1,3 +1,3 @@
-<template name="3155b75a">
-  <view class="_div data-v-b4d6083c recommnedsongs"> 每日推荐 </view>
-</template>
+<template name="3155b75a"><view class="_div data-v-b4d6083c recommnedsongs">
+  每日推荐
+</view></template>

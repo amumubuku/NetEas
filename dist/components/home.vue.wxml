@@ -1,9 +1,1 @@
-<template name="4083dbde">
-  <view class="_div data-v-672dad26 box-swiper">
-    <swiper current="{{activeIndex}}" duration="{{300}}" indicator-dots="{{showdots}}" autoplay="{{autoplay}}" indicator-color="{{color}}" indicator-active-color="{{activecolor}}" circular="{{circular}}" class="_swiper data-v-672dad26">
-      <swiper-item wx:key="index" key="{{index}}" wx:for="{{swiper}}" wx:for-index="index" wx:for-item="item" class="_swiper-item data-v-672dad26">
-        <image src="{{item.picUrl}}" alt class="_img data-v-672dad26"></image>
-      </swiper-item>
-    </swiper>
-  </view>
-</template>
+<template name="4083dbde"><view class="_div data-v-672dad26 box-swiper"><swiper current="{{activeIndex}}" duration="{{300}}" indicator-dots="{{showdots}}" autoplay="{{autoplay}}" indicator-color="{{color}}" indicator-active-color="{{activecolor}}" circular="{{circular}}" class="_swiper data-v-672dad26"><swiper-item wx:key="index" key="{{index}}" wx:for="{{swiper}}" wx:for-index="index" wx:for-item="item" class="_swiper-item data-v-672dad26"><image src="{{item.picUrl}}" alt class="_img data-v-672dad26"></image></swiper-item></swiper></view></template>

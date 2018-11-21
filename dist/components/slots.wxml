@@ -1,5 +1,4 @@
-<import src="/components/my.vue.wxml" />
-<import src="/components/home.vue.wxml" />
-<import src="/components/mvdetail.vue.wxml" />
-<import src="/components/musicdetail.vue.wxml" />
+
 <import src="/components/music-list.vue.wxml" />
+<import src="/components/my.vue.wxml" /><import src="/components/home.vue.wxml" /><import src="/components/mvdetail.vue.wxml" />
+<import src="/components/musicdetail.vue.wxml" />

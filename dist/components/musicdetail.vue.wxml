@@ -1,12 +1,1 @@
-<template name="6ba4e087">
-  <view class="_div data-v-31d28e3f music-detail">
-    <view class="_div data-v-31d28e3f detail-item ripple" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{songs}}" wx:for-index="index" wx:for-item="item">
-      <view class="_div data-v-31d28e3f detail-left">{{index + 1}}</view>
-      <view class="_div data-v-31d28e3f detail-right">
-        <view class="_p data-v-31d28e3f">{{item.name}}</view>
-        <view class="_p data-v-31d28e3f singer">{{item.singer}}</view>
-        <view class="_i data-v-31d28e3f flaticon-more"></view>
-      </view>
-    </view>
-  </view>
-</template>
+<template name="6ba4e087"><view class="_div data-v-31d28e3f music-detail"><view class="_div data-v-31d28e3f detail-item ripple" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{songs}}" wx:for-index="index" wx:for-item="item"><view class="_div data-v-31d28e3f detail-left">{{index + 1}}</view> <view class="_div data-v-31d28e3f detail-right"><view class="_p data-v-31d28e3f">{{item.name}}</view> <view class="_p data-v-31d28e3f singer">{{item.singer}}</view> <view class="_i data-v-31d28e3f flaticon-more"></view></view></view></view></template>

@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import {userplaylist} from '@/api/index'
+import {userplaylist, phoneLogin} from '@/api/index'
 import {mapMutations} from 'vuex'
 export default {
   data () {
@@ -100,6 +100,8 @@ export default {
     }
   },
   created () {
+    phoneLogin(19984480032, 'Fizz0311.').then(res => {
+    })
     userplaylist(this.userid).then(res => {
       res.forEach(element => {
         if (element.userId === this.userid) {
