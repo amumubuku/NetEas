@@ -1,8 +1,8 @@
 {
   "name": "music",
   "version": "1.0.0",
-  "description": "A Mpvue project",
-  "author": "zhouyi <azhouweiguang@gmail.com>",
+  "description": "网易云音乐小程序版本",
+  "author": "azhouweiguang@gmail.com",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

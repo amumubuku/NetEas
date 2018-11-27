@@ -2,13 +2,13 @@
   <div class="search">
     <div class="search-wrapper">
       <div class="search-input">
-        <input type="text" placeholder="搜索歌曲、歌手"  placeholder-style="color:#e6ecf7" :bindinput="changinput" v-model="keyWord">
+        <input type="text" placeholder="搜索歌曲、歌手"  :bindinput="changinput" v-model="value">
       </div>
-      <div class="search-empty ripple" @click="empty" v-show="keyWord != ''">
+      <div class="search-empty ripple" @click="empty" v-show="value">
         <i class="flaticon-close"></i>
       </div>
     </div>
-    <div class="shortcut-wrapper" v-show="keyWord === ''">
+    <div class="shortcut-wrapper" v-show="value === ''">
       <h3>热门搜索</h3>
       <div class="shortcut">
         <div class="shortcut-item" v-for="(item, index) in shortcthot" :key="index" @click="SelectShortct(item.first)">
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <musicdetail :songs="songs"></musicdetail>
+    <music-list :songs="songs"></music-list>
     <div class="loading" v-show="loading"></div>
   </div>
 </template>
@@ -24,23 +24,23 @@
 <script>
 import {shortcut, search, getsongdetail} from '@/api/index'
 import {Songsdetail, dobounce} from '@/utils/index'
-import musicdetail from '@/components/musicdetail'
+import MusicList from '@/components/musicdetail'
 export default {
   components: {
-    musicdetail
+    MusicList
   },
   data () {
     return {
       rank: [],
       shortcthot: [],
-      keyWord: '',
+      value: '',
       songs: [],
       loading: false
     }
   },
-  onLoad () {
-    this.$watch('keyWord', dobounce((newVal) => {
-      this.keyWord = newVal
+  mounted () {
+    this.$watch('value', dobounce((newVal) => {
+      this.value = newVal
       this.loading = true
       this.endsearch()
     }, 300))
@@ -49,20 +49,20 @@ export default {
     })
   },
   methods: {
-    SelectShortct (keyWord) {
-      this.keyWord = keyWord
+    SelectShortct (value) {
+      this.value = value
     },
     empty () {
-      this.keyWord = ''
+      this.value = ''
     },
     changinput (e) {
     },
     endsearch () {
       let data = []
-      if (this.keyWord === '') {
+      if (this.value === '') {
         return
       }
-      search(this.keyWord).then(res => {
+      search(this.value).then(res => {
         res.forEach(element => {
           getsongdetail(element.id).then(res => {
             data.push(Songsdetail(res[0]))

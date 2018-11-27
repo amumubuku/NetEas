@@ -84,22 +84,21 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setplayid: 'SET_PLAYID'
+       setDes: 'SET_DES'
     }),
     handercilik (item) {
-      console.log(item)
       let data = {
         id: item.id,
         picUrl: item.coverImgUrl,
         name: item.name,
         description: item.description
       }
-      this.setplayid(data)
+      this.setDes(data)
       const url = '../musiclist/main'
       wx.navigateTo({ url })
     }
   },
-  created () {
+  mounted () {
     phoneLogin(19984480032, 'Fizz0311.').then(res => {
     })
     userplaylist(this.userid).then(res => {

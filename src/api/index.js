@@ -138,9 +138,6 @@ export function phoneLogin (phone, pass) {
         if (!res.data.code === code) {
           return false
         }
-        let regex = /^(__scrf=.*;$)(MUSIC_U=.*;$)/
-        console.log(res.header['set-cookie'], regex)
-        resolve(res.data)
       }
     })
   })

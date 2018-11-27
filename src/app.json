@@ -9,13 +9,13 @@
     "pages/fm/main",
     "pages/musiclist/main",
     "pages/search/main",
-    "pages/playerdetail/main",
+    "pages/player/main",
     "pages/comment/main"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "red",
     "navigationBarBackgroundColor": "#ff3326",
     "navigationBarTitleText": "网易云音乐",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "red"
   }
 }

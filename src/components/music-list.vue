@@ -1,67 +1,55 @@
 <template>
   <div class="music-list">
-      <div class="music-top">
-          <img :src="personalizeds.picUrl" alt="">
-          <p>{{personalizeds.name}}</p>
-      </div>
-      <musicdetail :songs="MusicData"></musicdetail> 
-      <div class="loading" v-show="MusicData.length < 1"></div>
+    <div class="music-top">
+      <img :src="personalizeds.picUrl" alt="">
+      <p>{{personalizeds.name}}</p>
+    </div>
+    <music-list :songs="songs"></music-list>
+    <div class="loading" v-show="!songs.length"></div>
   </div>
 </template>
 <script>
-import {CreateSongs} from '@/utils/index'
-import {getpersonalized} from '@/api/index'
-import {mapGetters} from 'vuex'
-import musicdetail from '@/components/musicdetail'
+import { CreateSongs } from '@/utils/index'
+import { getpersonalized } from '@/api/index'
+import { mapGetters} from 'vuex'
+import MusicList from '@/components/musicdetail'
 export default {
   computed: {
-    ...mapGetters([
-      'personalizeds',
-      'currentIndex',
-      'currentSong'
-    ])
+    ...mapGetters(['personalizeds'])
   },
-  components: {
-    musicdetail
-  },
-  data () {
+  data() {
     return {
-      MusicData: []
+      songs: []
     }
   },
+  components: {
+    MusicList
+  },
   methods: {
-    createSong (musicdata) {
+    createSong(musicdata) {
       let res = []
       musicdata.forEach(element => {
         res.push(CreateSongs(element))
       })
-      this.MusicData = res
-      return false
+      this.songs = res
     },
-    personalized () {
+    personalized() {
       wx.setNavigationBarTitle({
-        title: this.personalizeds.description ? this.personalizeds.description : ''
-      })
-      wx.setNavigationBarColor({
-        frontColor: '#ffffff',
-        backgroundColor: '#898994',
-        animation: {
-          duration: 200,
-          timingFunc: 'easeIn'
-        }
+        title: this.personalizeds.description
+          ? this.personalizeds.description
+          : ''
       })
       getpersonalized(this.personalizeds.id).then(res => {
         this.createSong(res.tracks)
       })
     }
   },
-  onLoad () {
-    this.MusicData = []
+  mounted() {
     this.personalized()
   }
 }
 </script>
-<style>
+<style scoped>
 .music-list {
   background-color: #fff;
   position: absolute;
@@ -73,7 +61,7 @@ export default {
   color: #fff;
   width: 100%;
   height: 32%;
- background-image: linear-gradient(180deg, #898994 0%, #CEBEB8 100%);
+  background-image: linear-gradient(180deg, #898994 0%, #cebeb8 100%);
   display: flex;
   justify-content: flex-start;
   align-items: center;

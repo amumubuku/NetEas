@@ -11,31 +11,18 @@
     </div>
 </template>
 <script>
-import {mapMutations, mapGetters} from 'vuex'
+import {mapMutations} from 'vuex'
 export default {
+  name: 'MusicList',
   props: {
     songs: {
       tyep: Array,
       default: []
     }
   },
-  computed: {
-    taggle: function () {
-      return {
-      }
-    },
-    ...mapGetters([
-      'currentSong'
-    ])
-  },
-  data () {
-    return {
-    }
-  },
   methods: {
     ...mapMutations({
       setPlaylist: 'SET_PLAYLIST',
-      setPlayIndex: 'SET_CURRENT_INDEX'
     }),
     selectplay (index) {
       const url = '../playerdetail/main'
@@ -43,7 +30,6 @@ export default {
         list: this.songs,
         index: index
       })
-      this.setPlayIndex(index)
       wx.navigateTo({ url })
     }
   }

@@ -1,15 +1,34 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import state from '@/store/state'
-import mutations from '@/store/mutations'
-import * as actions from '@/store/actions'
-import * as getters from '@/store/getters'
-
+import getters from './getters'
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state,
-  actions,
+const store = new Vuex.Store({
   getters,
-  mutations
+  state: {
+    playlist: [],
+    currentSong: [],
+    playing: false,
+    des: [],
+    songIndex: -1
+  },
+  mutations: {
+    SET_PLAYLIST: (state, playlist) => {
+      state.playlist = playlist.list
+      state.songIndex = playlist.index
+    },
+    SET_DES: (state, arr) => {
+      state.des = arr
+    },
+    SET_SONGINDEX: (state, numder) => {
+      state.songIndex = numder
+    },
+    SET_PLAYING: (state, flg) => {
+      state.playing = flg
+    }
+  },
+  actions: {
+  }
 })
+
+export default store

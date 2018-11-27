@@ -1,16 +1,8 @@
-// import {normalSongs} from '../common/js/util'
-export const singer = state => state.singer
-export const playlist = state => state.playlist
-export const currentIndex = state => state.currentIndex
-export const currentSong = state => {
-  return state.playlist[state.currentIndex] || {}
+const getters = {
+  playlist: state => state.playlist,
+  personalizeds: state => state.des,
+  currentIndex: state => state.songIndex,
+  currentSong: state => state.playlist[state.songIndex],
+  playing: state => state.playing
 }
-export const fullScreen = state => state.fullScreen
-export const playing = state => state.playing
-export const iscloselist = state => state.closelist
-export const disc = state => state.disc
-export const toplist = state => state.toplist
-export const loadsearch = state => state.searchHitory
-export const personalizeds = state => state.personalized
-export const userid = state => state.userid
-// export const loadplaylist = state => normalSongs(state.playHitory)
+export default getters

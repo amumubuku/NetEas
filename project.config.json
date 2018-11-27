@@ -9,7 +9,7 @@
 	},
 	"miniprogramRoot": "./dist/",
 	"compileType": "miniprogram",
-	"appid": "touristappid",
+	"appid": "wxb1596037adf18f4f",
 	"projectname": "music",
 	"condition": {
 		"search": {
