@@ -1,32 +1,66 @@
 <template>
   <div class="player-detail">
     <div class="background">
-      <img :src="currentSong.image" alt="">
+      <img :src="currentSong.image"
+           alt>
     </div>
     <div class="player-hender">
-      <p>{{currentSong.name}}</p>
-      <p class="player-singer">{{currentSong.singer}}</p>
-    </div>
-    <div class="player-wrapper" @touchstart="Touchstart" @touchend="TouchEnd" @click="toggleying">
-      <div class="player-cd" v-show="toggleplaying">
-         <img :src="currentSong.image" alt=""> 
+      <div class="player-back"
+           @click="back">
+        <i class="flaticon-down-arrow"></i>
       </div>
-      <scroll-view class="scroll-lyric" scroll-y style="width: 100%;height:100%" :scroll-into-view="scroll_id" scroll-with-animation="true" v-show="!toggleplaying">
+      <div class="player-content">
+        <p>{{currentSong.name}}</p>
+        <p class="player-singer">{{currentSong.singer}}</p>
+        <div class="hender-line"></div>
+      </div>
+    </div>
+    <div class="player-wrapper"
+         @touchstart="Touchstart"
+         @touchend="TouchEnd"
+         @click="toggleying">
+      <div class="player-cd"
+           v-show="toggleplaying">
+        <img :src="currentSong.image"
+             alt
+             :class="{'stoprotate': !playing}">
+      </div>
+      <scroll-view class="scroll-lyric"
+                   scroll-y
+                   style="width: 100%;height:100%"
+                   :scroll-into-view="scroll_id"
+                   scroll-with-animation="true"
+                   v-show="!toggleplaying">
         <div class="Lyric">
-          <p v-for="(item, index) in currentLyric.lines" :key="index" :class="{'current': currentLineNum === index}" :id="scroll + index">{{item.txt}}</p>
+          <p v-for="(item, index) in currentLyric.lines"
+             :key="index"
+             :class="{'current': currentLineNum === index}"
+             :id="scroll + index">{{item.txt}}</p>
         </div>
       </scroll-view>
     </div>
     <div class="player-buttom">
       <div class="buttom-hender">
-        <div class="comment"><div class="comment-icon" @click="opencomment"><i class="flaticon-menu"></i></div></div>
+        <div class="comment">
+          <div class="comment-icon"
+               @click="opencomment">
+            <i class="flaticon-menu"></i>
+          </div>
+        </div>
       </div>
       <div class="progress-bar-wrapper">
         <div class="progress-btn">
           <p>{{Time}}</p>
-          <div class="progress-inner" >
-             <div class="progressBtn" :style="{ left: left + 'px' }" :animation="btn"></div>
-             <progress @click="seek" :percent="percent" stroke-width="3" backgroundColor="#888" activeColor="#ff3326" id="box"/>
+          <div class="progress-inner">
+            <div class="progressBtn"
+                 :style="{ left: left + 'px' }"
+                 :animation="btn"></div>
+            <progress @click="seek"
+                      :percent="percent"
+                      stroke-width="3"
+                      backgroundColor="#888"
+                      activeColor="#ff3326"
+                      id="box" />
           </div>
           <p>{{dt}}</p>
         </div>
@@ -35,13 +69,16 @@
         <div class="player-icon">
           <i class="flaticon-loop"></i>
         </div>
-        <div class="player-icon" @click="pevr">
+        <div class="player-icon"
+             @click="pevr">
           <i class="flaticon-next-1"></i>
         </div>
-        <div class="player-icon" @click="changplaying">
+        <div class="player-icon"
+             @click="changplaying">
           <i :class="playicon"></i>
         </div>
-        <div class="player-icon" @click="next">
+        <div class="player-icon"
+             @click="next">
           <i class="flaticon-next"></i>
         </div>
         <div class="player-icon">
@@ -52,12 +89,11 @@
   </div>
 </template>
 <script>
-import {mapMutations, mapGetters} from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import Lyric from 'lyric-parser'
 const btnWidht = 6
 export default {
-  components: {
-  },
+  components: {},
   data () {
     return {
       rank: [],
@@ -67,7 +103,7 @@ export default {
       left: 0,
       btn: {},
       dt: 0,
-      Time: 0.00,
+      Time: 0.0,
       query: '',
       progressWidth: 0,
       currentLyric: '',
@@ -85,17 +121,16 @@ export default {
       return this.playing ? 'flaticon-pause' : 'flaticon-play-button'
     },
     taggle: function () {
-      return {
-      }
+      return {}
     },
-    ...mapGetters([
-      'playlist',
-      'currentIndex',
-      'currentSong',
-      'playing'
-    ])
+    ...mapGetters(['playlist', 'currentIndex', 'currentSong', 'playing'])
   },
   methods: {
+    back () {
+      wx.navigateBack({
+        delta: 1
+      })
+    },
     toggleying () {
       this.toggleplaying = !this.toggleplaying
     },
@@ -111,30 +146,34 @@ export default {
       this.currentScroll = false
     },
     seek (e) {
-      this.touch.percent = (e.touches[0].pageX - this.offLeft - btnWidht) / this.progressWidth
+      this.touch.percent =
+        (e.touches[0].pageX - this.offLeft - btnWidht) / this.progressWidth
       let startTime = this.touch.percent * this.duration
       this.backgroundAudioManager.seek(startTime)
       this.currentLyric.seek(startTime * 1000)
     },
     getLyric () {
-      this.currentSong.getLyric().then(lyric => {
-        this.currentLyric = new Lyric(lyric, this.handleLyric)
-        this.currentLyric.play()
-        let play = this.currentSong
-        this.percent = 0
-        this.left = 0
-        this.duration = play.duration / 1000
-        this.dt = this.format(this.duration)
-        this.backgroundAudioManager.title = play.name
-        this.backgroundAudioManager.name = play.name
-        this.backgroundAudioManager.singer = play.singer
-        this.backgroundAudioManager.coverImgUrl = play.image
-        this.backgroundAudioManager.src = play.url
-      }).catch(() => {
-        this.currentLyric = null
-        this.currentLineNum = 0
-        this.playingLyric = ''
-      })
+      this.currentSong
+        .getLyric()
+        .then(lyric => {
+          this.currentLyric = new Lyric(lyric, this.handleLyric)
+          this.currentLyric.play()
+          let play = this.currentSong
+          this.percent = 0
+          this.left = 0
+          this.duration = play.duration / 1000
+          this.dt = this.format(this.duration)
+          this.backgroundAudioManager.title = play.name
+          this.backgroundAudioManager.name = play.name
+          this.backgroundAudioManager.singer = play.singer
+          this.backgroundAudioManager.coverImgUrl = play.image
+          this.backgroundAudioManager.src = play.url
+        })
+        .catch(() => {
+          this.currentLyric = null
+          this.currentLineNum = 0
+          this.playingLyric = ''
+        })
     },
     next () {
       let index = 0
@@ -158,7 +197,7 @@ export default {
     changplaying () {
       this.setplaying(!this.playing)
     },
-    handleLyric ({lineNum, txt}) {
+    handleLyric ({ lineNum, txt }) {
       this.currentLineNum = lineNum
       if (lineNum > 6 && this.currentScroll) {
         return
@@ -175,7 +214,7 @@ export default {
     }),
     format (interval) {
       interval = interval | 0
-      const minute = interval / 60 | 0
+      const minute = (interval / 60) | 0
       const second = this._pad(interval % 60)
       return `${minute}:${second}`
     },
@@ -195,10 +234,13 @@ export default {
       var that = this
       if (!that.progressWidth > 0) {
         this.query = wx.createSelectorQuery()
-        this.query.select('#box').boundingClientRect(function (rect) {
-          that.progressWidth = rect.width - rect.left
-          that.offLeft = rect.left + 12
-        }).exec()
+        this.query
+          .select('#box')
+          .boundingClientRect(function (rect) {
+            that.progressWidth = rect.width - rect.left
+            that.offLeft = rect.left + 12
+          })
+          .exec()
       }
       that.left = percent * (that.progressWidth - btnWidht)
     }
@@ -210,15 +252,16 @@ export default {
       this.currentTime = this.backgroundAudioManager.currentTime
       this.Time = this.format(this.currentTime)
     })
-    this.backgroundAudioManager.onPlay(e => {
-    })
+    this.backgroundAudioManager.onPlay(e => { })
     this.backgroundAudioManager.onEnded(e => {
       this.next()
     })
   },
   watch: {
     playing (newplaying, old) {
-      newplaying ? this.backgroundAudioManager.play() : this.backgroundAudioManager.pause()
+      newplaying
+        ? this.backgroundAudioManager.play()
+        : this.backgroundAudioManager.pause()
     },
     currentSong (newSong, oldSong) {
       if (newSong === oldSong) {
@@ -238,24 +281,36 @@ export default {
 }
 </script>
 <style>
+.hender-line {
+  height: 1px;
+  width: 100%;
+  margin: 0 auto;
+  background-image: linear-gradient(
+    270deg,
+    hsla(0, 0%, 100%, 0),
+    hsla(0, 0%, 100%, 0.6),
+    hsla(0, 0%, 100%, 0)
+  );
+  margin: 8px 0;
+}
 .flaticon-menu::before {
-  color: #fff
+  color: #fff;
 }
 #box {
   padding: 4px;
   position: relative;
-  top:-3px;
+  top: -3px;
   left: 0;
 }
 .current {
   color: #fff;
-  font-size: 13px;
+  font-size: 15px;
 }
 .scroll-lyric {
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 26px;
   text-align: center;
-  color: #666;
+  color: #ccc;
   width: 100%;
   position: absolute;
   top: 0;
@@ -268,7 +323,7 @@ export default {
   position: relative;
   width: 100%;
   height: 0;
-  padding-top: 80%;
+  padding-top: 70%;
 }
 .progressBtn {
   width: 11px;
@@ -277,15 +332,15 @@ export default {
   position: absolute;
   top: -3px;
   left: 0;
-  border-radius: 50%; 
+  border-radius: 50%;
   z-index: 1;
 }
 .progressBtn::before {
-  content: '';
+  content: "";
   width: 9px;
   height: 9px;
   background-color: red;
-  border-radius:50%; 
+  border-radius: 50%;
 }
 .background {
   position: absolute;
@@ -293,7 +348,7 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  opacity: .6;
+  opacity: 0.6;
   -webkit-filter: blur(20px);
   filter: blur(20px);
 }
@@ -308,13 +363,38 @@ export default {
   background-color: #222;
 }
 .player-hender {
-  font-size: 12px;
-  text-align: center;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 44px;
+  width: 100%;
+  align-items: center;
+  margin-top: 22px;
+  z-index: 1;
+  position: relative;
+}
+.flaticon-down-arrow::before {
+  font-size: 22px;
   color: #fff;
-  margin-bottom: 32px;
+  text-align: center;
+}
+.player-back {
+  height: 40px;
+  width: 40px;
+  flex: 0 0 40px;
+}
+.player-content {
+  flex: 1;
+  margin: 0 34px 0 12px;
+  font-size: 14px;
+  color: #fff;
+}
+.player-content p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .player-singer {
-  font-size: 10px;
+  font-size: 12px;
   color: #ccc;
 }
 .player-wrapper {
@@ -325,12 +405,14 @@ export default {
 }
 .player-wrapper img {
   position: absolute;
-  left: 10%;
-  top: 0;
-  width: 80%;
+  left: 15%;
+  top: 32%;
+  width: 70%;
   box-sizing: border-box;
   height: 100%;
   border-radius: 50%;
+  border: 12px solid hsla(0, 0%, 100%, 0.1);
+  animation: rotate 20s linear infinite;
 }
 .operators {
   width: 100%;
@@ -339,7 +421,7 @@ export default {
   justify-content: center;
   align-content: center;
 }
-.operators .player-icon  {
+.operators .player-icon {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -351,8 +433,11 @@ export default {
   color: #fff;
   font-size: 20px;
 }
-.operators .player-icon > .flaticon-pause::before .flaticon-play-button::before {
-  font-size: 24px;
+.operators .player-icon > .flaticon-play-button::before {
+  font-size: 28px;
+}
+.operators .player-icon > .flaticon-pause::before {
+  font-size: 28px;
 }
 .operators .player-icon > i {
   height: 34px;
@@ -364,7 +449,7 @@ export default {
   position: relative;
 }
 .buttom-hender {
- height: 26%;
+  height: 26%;
 }
 .player-buttom {
   position: fixed;
@@ -391,5 +476,16 @@ export default {
   margin: 0 6px;
   border-radius: 3px;
   position: relative;
+}
+.player-cd .stoprotate {
+  animation-play-state: paused;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

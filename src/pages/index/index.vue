@@ -1,58 +1,71 @@
 <template>
   <div class="container">
-    <div class="header">
-      <div class="menu">
-        <div class="menu-box ripple">
-          <i class="flaticon-menu-options"></i>
-        </div>
+    <div class="header"
+         :style="{height: navInfo.h + 'px', paddingTop: navInfo.pt + 'px' }">
+      <div class="search-icon"
+           @click="search">
+        <i class="flaticon-search"></i>
       </div>
       <div class="tab-warpper">
-        <div class="my ripple" @click="changIndex(0)" :class="{ active: activeIndex === 0}">
+        <div class="my ripple"
+             @click="changIndex(0)"
+             :class="{ active: activeIndex === 0}">
           <i class="flaticon-musical-note"></i>
         </div>
-        <div class="home ripple" @click="changIndex(1)" :class="{ active: activeIndex === 1}">
+        <div class="home ripple"
+             @click="changIndex(1)"
+             :class="{ active: activeIndex === 1}">
           <i class="flaticon-5b77b6a5cfe0a"></i>
         </div>
-        <div class="video ripple" @click="changIndex(2)" :class="{ active: activeIndex === 2}">
+        <div class="video ripple"
+             @click="changIndex(2)"
+             :class="{ active: activeIndex === 2}">
           <i class="flaticon-social-media"></i>
         </div>
       </div>
-      <div class="search" @click="search">
-        <div class="search-box ripple">
-          <i class="flaticon-search"></i>
-        </div>
-      </div>
     </div>
-    <div class="tabbar-wrapper">
-      <swiper :current="activeIndex" :duration="300" @change="Change" class="swiper">
+    <div class="tabbar-wrapper"
+         :style="{top: navInfo.h + navInfo.pt + 'px'}">
+      <swiper :current="activeIndex"
+              :duration="300"
+              @change="Change"
+              class="swiper">
         <swiper-item>
-          <scroll-view scroll-y style="height: 100%">
+          <scroll-view scroll-y
+                       style="height: 100%">
             <my />
           </scroll-view>
         </swiper-item>
-        <swiper-item >
-           <scroll-view scroll-y style="height: 100%">
-             <home />
+        <swiper-item>
+          <scroll-view scroll-y
+                       style="height: 100%">
+            <home />
           </scroll-view>
         </swiper-item>
-        <swiper-item >
-           <scroll-view scroll-y style="height: 100%">
+        <swiper-item>
+          <scroll-view scroll-y
+                       style="height: 100%">
             <mv :index="activeIndex" />
           </scroll-view>
         </swiper-item>
       </swiper>
     </div>
-    <div class="player" v-if="playlist.length > 1" @click="playerdetail">
+    <div class="player"
+         v-if="playlist.length > 1"
+         @click="playerdetail">
       <div class="mini-player">
         <div class="mini-player-img">
-          <img :src="currentSong.image" alt="">
+          <img :src="currentSong.image"
+               alt="">
         </div>
         <div class="mini-player-detail">
           <p>{{currentSong.name}}</p>
           <p>{{currentSong.singer}}</p>
         </div>
         <div class="mini-player-icon">
-          <div class="player-stop " :class="playicon" @click="next">
+          <div class="player-stop "
+               :class="playicon"
+               @click="next">
           </div>
           <div class="player-list flaticon-list">
           </div>
@@ -67,7 +80,7 @@ import Home from '@/components/home'
 import My from '@/components/my'
 import Mv from '@/components/mvdetail'
 export default {
-  data() {
+  data () {
     return {
       slideOffset: 0,
       activeIndex: 1,
@@ -77,7 +90,8 @@ export default {
       musicshow: false,
       playid: 0,
       picUrl: '',
-      name: ''
+      name: '',
+      navInfo: {}
     }
   },
   components: {
@@ -86,34 +100,44 @@ export default {
     My
   },
   computed: {
-    playicon() {
+    playicon () {
       return this.playing ? 'flaticon-pause' : 'flaticon-play-button'
     },
-    taggle: function() {
+    taggle: function () {
       return {}
     },
     ...mapGetters(['playlist', 'currentIndex', 'currentSong', 'playing'])
   },
+  mounted () {
+    let systemInfo = wx.getSystemInfoSync()
+    let reg = /ios/i
+    this.navInfo.pt = systemInfo.statusBarHeight
+    if (reg.test(systemInfo.system)) {
+      this.navInfo.h = 44
+    } else {
+      this.navInfo.h = 48
+    }
+  },
   methods: {
-    next() {
+    next () {
       this.setPlayindex(this.currentIndex + 1)
     },
-    search() {
+    search () {
       const url = '../search/main'
       wx.navigateTo({ url })
     },
-    rank() {
+    rank () {
       const url = '../rank/main'
       wx.navigateTo({ url })
     },
-    player() {
+    player () {
       const url = '../player/main'
       wx.navigateTo({ url })
     },
-    changIndex(index) {
+    changIndex (index) {
       this.activeIndex = index
     },
-    Change(e) {
+    Change (e) {
       this.activeIndex = e.target.current
     }
   }
@@ -121,28 +145,12 @@ export default {
 </script>
 
 <style scoped>
-.search-box {
-  width: 26px;
-  height: 26px;
+.search-icon {
   position: absolute;
-  right: 2px;
-  top: 0;
-  padding: 6px;
+  left: 0;
+  padding: 4px;
 }
-.menu-box {
-  width: 26px;
-  height: 26px;
-  position: absolute;
-  left: 2px;
-  top: 0;
-  padding: 6px;
-}
-.flaticon-search::before,
-.flaticon-menu-options::before {
-  position: absolute;
-  top: 2px;
-  left: -13px;
-  font-size: 20px;
+.search-icon .flaticon-search::before {
   color: #fff;
 }
 .flaticon-social-media,
@@ -214,7 +222,6 @@ export default {
 }
 .tabbar-wrapper {
   position: fixed;
-  top: 37px;
   bottom: 0;
   width: 100%;
 }
@@ -234,20 +241,12 @@ export default {
   font-size: 15px;
 }
 .header {
-  height: 37px;
   background-color: #ff3326;
   width: 100%;
   display: flex;
-}
-.menu,
-.centent,
-.search {
-  flex: 1;
-  margin: 0 auto;
-  align-content: flex-end;
-}
-.menu {
-  align-content: flex-start;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
 }
 .tab-warpper {
   display: flex;

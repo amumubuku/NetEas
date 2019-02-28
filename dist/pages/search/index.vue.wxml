@@ -1,1 +1,17 @@
-<import src="/components/musicdetail.vue.wxml" /><template name="2f3d0666"><view class="_div data-v-6fafef98 search"><view class="_div data-v-6fafef98 search-wrapper"><view class="_div data-v-6fafef98 search-input"><input type="text" placeholder="搜索歌曲、歌手" bindinput="handleProxy" value="{{value}}" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_input data-v-6fafef98" /></view> <view class="_div data-v-6fafef98 search-empty ripple" bindtap="handleProxy" hidden="{{!(value)}}" data-eventid="{{'1'}}" data-comkey="{{$k}}"><view class="_i data-v-6fafef98 flaticon-close"></view></view></view> <view class="_div data-v-6fafef98 shortcut-wrapper" hidden="{{!(value === '')}}"><view class="_h3 data-v-6fafef98">热门搜索</view> <view class="_div data-v-6fafef98 shortcut"><view class="_div data-v-6fafef98 shortcut-item" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'2-'+index}}" data-comkey="{{$k}}" wx:for="{{shortcthot}}" wx:for-index="index" wx:for-item="item"><label class="_span data-v-6fafef98">{{item.first}}</label></view></view></view> <template data="{{...$root[$kk+'0'], $root}}" is="6ba4e087"></template> <view class="_div data-v-6fafef98 loading" hidden="{{!(loading)}}"></view></view></template>
+<import src="/components/music-list.vue.wxml" /><template name="2f3d0666">
+  <view class="_div data-v-6fafef98 search">
+    <view class="_div data-v-6fafef98 search-wrapper">
+      <view class="_div data-v-6fafef98 search-input"><input type="text" placeholder="搜索歌曲、歌手" bindinput="handleProxy" value="{{value}}" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_input data-v-6fafef98" /></view>
+      <view class="_div data-v-6fafef98 search-empty ripple" bindtap="handleProxy" hidden="{{!(value)}}" data-eventid="{{'1'}}" data-comkey="{{$k}}">
+        <view class="_i data-v-6fafef98 flaticon-close"></view>
+      </view>
+    </view>
+    <view class="_div data-v-6fafef98 shortcut-wrapper" hidden="{{!(value === '')}}">
+      <view class="_h3 data-v-6fafef98">热门搜索</view>
+      <view class="_div data-v-6fafef98 shortcut">
+        <view class="_div data-v-6fafef98 shortcut-item" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'2-'+index}}" data-comkey="{{$k}}" wx:for="{{shortcthot}}" wx:for-index="index" wx:for-item="item"><label class="_span data-v-6fafef98">{{item.first}}</label></view>
+      </view>
+    </view> <template data="{{...$root[$kk+'0'], $root}}" is="2bd48585"></template>
+    <view class="_div data-v-6fafef98 loading" hidden="{{!(loading)}}"></view>
+  </view>
+</template>

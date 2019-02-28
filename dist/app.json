@@ -16,6 +16,8 @@
     "backgroundTextStyle": "red",
     "navigationBarBackgroundColor": "#ff3326",
     "navigationBarTitleText": "网易云音乐",
-    "navigationBarTextStyle": "red"
+    "navigationBarTextStyle": "red",
+    "navigationStyle": "custom"
+
   }
 }

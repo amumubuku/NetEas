@@ -1,19 +1,26 @@
 <template>
   <div class="rank-wrapper">
     <h3>官方榜</h3>
-    <div class="rank-item" v-for="(item, index) in rank" :key="index" @click="selectrank(item)">
+    <div class="rank-item"
+         v-for="(item, index) in rank"
+         :key="index"
+         @click="selectrank(item)">
       <div class="item-left">
-        <img :src="item.coverImgUrl" alt="">
+        <img :src="item.coverImgUrl"
+             alt="">
         <p>{{item.updateFrequency}}</p>
       </div>
       <ul class="item-right">
-        <li v-for="(data, i) in item.tracks" :key="i" class="song">
+        <li v-for="(data, i) in item.tracks"
+            :key="i"
+            class="song">
           <span class="song-index">{{i + 1}}</span>
           <span class="song-name">{{data.first}} - {{data.second}}</span>
         </li>
       </ul>
     </div>
-    <div class="loading" v-show="!rank.length"></div>
+    <div class="loading"
+         v-show="!rank.length"></div>
   </div>
 </template>
 
@@ -22,7 +29,7 @@ import { rank } from '@/api/index'
 import { mapMutations } from 'vuex'
 export default {
   components: {},
-  data() {
+  data () {
     return {
       rank: []
     }
@@ -31,7 +38,7 @@ export default {
     ...mapMutations({
       setDes: 'SET_DES'
     }),
-    selectrank(item) {
+    selectrank (item) {
       let data = {
         id: item.id,
         picUrl: item.coverImgUrl,
@@ -43,7 +50,7 @@ export default {
       wx.navigateTo({ url })
     }
   },
-  mounted() {
+  mounted () {
     rank().then(res => {
       this.rank = res
     })

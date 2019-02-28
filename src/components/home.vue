@@ -1,39 +1,45 @@
 <template>
-    <div class="homo-warpper">
-        <banner />
-        <div class="nav-box">
-            <div class="nav-item">
-                <div class="item-top"></div>
-                <p>私人FM</p>
-            </div>
-            <div class="nav-item">
-                <div class="item-top"></div>
-                <p>每日推荐</p>
-            </div>
-            <div class="nav-item">
-                <div class="item-top"></div>
-                <p>歌单</p>
-            </div>
-            <div class="nav-item" @click="rank">
-                <div class="item-top"></div>
-                <p>排行榜</p>
-            </div>
-        </div>
-        <h3>推荐歌单 <i class="flaticon-right-arrow"></i></h3>
-        <div class="recommend">
-            <div class="recommend-item" v-for="(item, index) in recommend" :key="index" @click="handerPlaylist(item)">
-                <i class="playCount">{{item.playCount}}万</i>
-                <img :src="item.picUrl" alt="">
-                <p>{{item.name}}</p>
-            </div>
-        </div>
-         <div class="loading" v-show="!recommend.length"></div>
+  <div class="homo-warpper">
+    <banner />
+    <div class="nav-box">
+      <div class="nav-item">
+        <div class="item-top"></div>
+        <p>私人FM</p>
+      </div>
+      <div class="nav-item">
+        <div class="item-top"></div>
+        <p>每日推荐</p>
+      </div>
+      <div class="nav-item">
+        <div class="item-top"></div>
+        <p>歌单</p>
+      </div>
+      <div class="nav-item"
+           @click="rank">
+        <div class="item-top"></div>
+        <p>排行榜</p>
+      </div>
     </div>
+    <h3>推荐歌单 <i class="flaticon-right-arrow"></i></h3>
+    <div class="recommend">
+      <div class="recommend-item"
+           v-for="(item, index) in recommend"
+           :key="index"
+           @click="handerPlaylist(item)">
+        <i class="playCount">{{item.playCount}}万</i>
+        <img :src="item.picUrl"
+             alt="">
+        <p>{{item.name}}</p>
+      </div>
+    </div>
+    <div class="loading"
+         v-show="!recommend.length"></div>
+  </div>
 </template>
 
 <script>
 import { recommned } from '@/api/index.js'
-import {mapMutations, mapGetters} from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import Banner from '@/components/banner'
 export default {
   name: 'Home',
@@ -46,15 +52,15 @@ export default {
     }
   },
   methods: {
-     ...mapMutations({
+    ...mapMutations({
       setDes: 'SET_DES'
     }),
-    handerPlaylist(item) {
+    handerPlaylist (item) {
       let data = {
         id: item.id,
         picUrl: item.picUrl,
         name: item.name,
-        description: item.description
+        des: item.copywriter
       }
       this.setDes(data)
       const url = '../musiclist/main'
@@ -66,6 +72,7 @@ export default {
     }
   },
   mounted () {
+    console.log(wx.getSystemInfoSync())
     recommned().then(res => {
       let data = []
       res.forEach(element => {
@@ -87,9 +94,9 @@ h3 {
   position: relative;
   left: 13px;
 }
-.flaticon-right-arrow::before{
+.flaticon-right-arrow::before {
   position: absolute;
-  left:62rpx;
+  left: 62rpx;
   top: 2px;
   font-size: 15px;
 }
@@ -140,7 +147,7 @@ h3 {
   align-items: center;
 }
 .nav-box .nav-item p {
- line-height: 22px;
+  line-height: 22px;
 }
 .item-top {
   border-radius: 50%;

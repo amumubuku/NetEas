@@ -24,7 +24,7 @@
 <script>
 import {shortcut, search, getsongdetail} from '@/api/index'
 import {Songsdetail, dobounce} from '@/utils/index'
-import MusicList from '@/components/musicdetail'
+import MusicList from '@/components/music-list'
 export default {
   components: {
     MusicList

@@ -1,0 +1,13 @@
+<template name="4de264ce">
+  <view class="_div data-v-16b9a4e1 nvaigation-warpper" style=" {{(  'height:' +  (navInfo.h + 'px') +  ';' +  'padding-top:' +  (navInfo.pt + 'px') +  ';' +  'line-height:' +  (navInfo.pt + 'px') +  ';')}}">
+    <view class="_div data-v-16b9a4e1 nvaigation-hender">
+      <view class="_div data-v-16b9a4e1 nvaigation-back" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+        <view class="_i data-v-16b9a4e1 flaticon-down-arrow"></view>
+      </view>
+      <view class="_div data-v-16b9a4e1 hender-detail">
+        <view class="_p data-v-16b9a4e1">歌单</view>
+        <view class="_p data-v-16b9a4e1 nvaigation-title">{{title}}</view>
+      </view>
+    </view>
+  </view>
+</template>

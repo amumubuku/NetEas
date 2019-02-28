@@ -1,1 +1,16 @@
-<import src="/components/music-list.vue.wxml" /><template name="909cc9cc"><view class="_div data-v-75f172a9 music"><template data="{{...$root[$kk+'0'], $root}}" is="2bd48585"></template></view></template>
+<import src="/components/navigation-bar.vue.wxml" />
+<import src="/components/music-list.vue.wxml" /><template name="909cc9cc">
+  <view class="_div data-v-75f172a9 music-list"><template data="{{...$root[$kk+'0'], $root}}" is="4de264ce"></template>
+    <view class="_div data-v-75f172a9 music-top">
+      <image src="{{personalizeds.picUrl}}" alt class="_img data-v-75f172a9"></image>
+      <view class="_p data-v-75f172a9">{{personalizeds.name}}</view>
+    </view>
+    <view class="_div data-v-75f172a9 playall" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+      <view class="_div data-v-75f172a9 play-icon ">
+        <view class="_i data-v-75f172a9 flaticon-play-button"></view>
+      </view>
+      <view class="_div data-v-75f172a9 play-list">播放全部<label class="_span data-v-75f172a9">(共{{songs.length}}首)</label></view>
+    </view> <template data="{{...$root[$kk+'1'], $root}}" is="2bd48585"></template>
+    <view class="_div data-v-75f172a9 loading" hidden="{{!(!songs.length)}}"></view>
+  </view>
+</template>
